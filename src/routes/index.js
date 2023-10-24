@@ -1,5 +1,6 @@
 import express from 'express';
-import CompactorController from "../controllers/compactorController.js"
+import CompactorController from "../controllers/compactorController.js";
+import multerMiddleware from '../middleware/multer.js'
 
 const routes = (app) => {
 
@@ -7,7 +8,7 @@ const routes = (app) => {
 
     router
         .get("/", CompactorController.getCompactor)
-        .post("/", CompactorController.postCompactor)
+        .post("/", multerMiddleware.single('image'), CompactorController.postCompactor)
 
     app.use(
         express.json(),
